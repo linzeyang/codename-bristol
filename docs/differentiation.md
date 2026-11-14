@@ -65,7 +65,7 @@
 2. 把「能量」滑杆从低拖到高，等待结果刷新，歌曲风格与理由发生变化；刷新页面参数仍保留（本地保存）。
 
 **实现位置**
-- 后端 `services/recommend.ts`、`GET /api/home`；前端 `Tuner.tsx`、`ReasonChip`。
+- 后端 `services/recommend.ts`、`GET /api/home`；前端 `pages/HomePage.tsx`（内嵌调音台）、`components/ArtCard.tsx`（理由标签）。
 
 ---
 
@@ -86,7 +86,7 @@
 3. 全程页面路由不变，侧栏与音乐库状态保留。
 
 **实现位置**
-- 前端 `PlayerContext.tsx`、`NowPlaying.tsx`、`QueueList.tsx`。
+- 前端 `PlayerContext.tsx`、`components/NowPlaying.tsx`（歌词、队列与信息在同一组件内）。
 
 ---
 
@@ -95,7 +95,7 @@
 **改进什么**
 - 全局快捷键：`Space` 播放/暂停、`←/→` ±5 秒、`Shift+←/→` 上一首/下一首、`L` 喜欢当前曲目、`Q` 打开队列、`/` 聚焦搜索、`⌘K` 命令面板、`?` 快捷键说明、`Esc` 关闭浮层。
 - 语义化结构、跳过导航链接、可见焦点环、所有纯图标按钮有 `aria-label`、动态播放状态通过 `aria-live` 播报、焦点陷阱与 Esc 关闭弹层。
-- 字号/对比度满足 WCAG AA；命中区 ≥ 44×44；`prefers-reduced-motion` 与设置中的「减少动效」同时生效。
+- 字号/对比度满足 WCAG AA；播放与导航等关键操作命中区 ≥ 44×44，列表次级图标按钮为 34×34 且均带 `aria-label`；`prefers-reduced-motion` 与设置中的「减少动效」同时生效。
 
 **为什么更好（证据）**
 - X 的元数据大量使用 11–12px 低对比灰字（`01.jpeg` 页脚、`02.jpeg` 播放次数、`09.jpeg` 时长），全屏播放页的控制几乎都是无文字图标（`10.jpeg`），依赖鼠标悬停。
@@ -106,7 +106,7 @@
 2. 顶栏「减少动效」或系统设置后，过渡动画显著减少。
 
 **实现位置**
-- 前端 `useGlobalShortcuts.ts`、`ShortcutSheet.tsx`、全局样式焦点环与 reduced-motion 规则。
+- 前端 `components/AppShell.tsx`（全局快捷键）、`components/ShortcutSheet.tsx`、全局样式焦点环与 reduced-motion 规则。
 
 ---
 
