@@ -1,0 +1,24 @@
+{
+  "name": "shengyu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "声屿 — 原创音乐流媒体原型",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm run dev -w @shengyu/api\" \"npm run dev -w @shengyu/web\"",
+    "build": "npm run build -w @shengyu/api && npm run build -w @shengyu/web",
+    "test": "npm run test -w @shengyu/api && npm run test -w @shengyu/web",
+    "typecheck": "npm run typecheck -w @shengyu/api && npm run typecheck -w @shengyu/web",
+    "db:migrate": "npm run db:migrate -w @shengyu/api",
+    "db:seed": "npm run db:seed -w @shengyu/api",
+    "generate:audio": "python3 scripts/generate-audio.py"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
