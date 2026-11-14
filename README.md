@@ -78,6 +78,7 @@ npm run dev
 | --- | --- | --- |
 | `PORT` | `3001` | API 端口 |
 | `DATABASE_URL` | `postgres://postgres@localhost:5432/shengyu` | 本地开发数据库连接串 |
+| `COMPOSE_DATABASE_URL` | 指向 compose 内 `db` 服务 | 仅容器部署；连接外部数据库时覆盖 |
 | `JWT_SECRET` | 空（生成临时随机值） | **生产必填**；留空时重启会失效所有会话 |
 | `COOKIE_SECURE` | `false` | HTTPS 部署设为 `true` |
 | `ALLOWED_ORIGINS` | localhost/127.0.0.1 的 5173/8080 | 写操作 Origin 白名单 |

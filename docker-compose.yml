@@ -28,7 +28,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3001
-      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}@db:5432/${POSTGRES_DB:-shengyu}
+      DATABASE_URL: ${COMPOSE_DATABASE_URL:-postgres://${POSTGRES_USER:-postgres}@db:5432/${POSTGRES_DB:-shengyu}}
       JWT_SECRET: ${JWT_SECRET:-}
       COOKIE_SECURE: ${COOKIE_SECURE:-false}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:8080,http://127.0.0.1:8080}
@@ -70,7 +70,7 @@ services:
       dockerfile: apps/api/Dockerfile
     environment:
       NODE_ENV: seed
-      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}@db:5432/${POSTGRES_DB:-shengyu}
+      DATABASE_URL: ${COMPOSE_DATABASE_URL:-postgres://${POSTGRES_USER:-postgres}@db:5432/${POSTGRES_DB:-shengyu}}
     depends_on:
       api:
         condition: service_healthy

@@ -117,7 +117,7 @@
 
 ### 5.1 数据库与演示凭据（重要）
 
-- compose 的 PostgreSQL 使用 `trust` 认证且端口绑定 `127.0.0.1`，仅适合本地演示。生产必须使用强密码、TLS、私有网络，并设置 `DATABASE_URL`/`POSTGRES_PASSWORD`。
+- compose 的 PostgreSQL 使用 `trust` 认证且端口绑定 `127.0.0.1`，仅适合本地演示。生产必须使用强密码、TLS、私有网络，通过 `COMPOSE_DATABASE_URL` 指向加固后的数据库，并调整数据库认证方式（compose 内 `trust` 配置需替换）。
 - 种子账号 `demo@shengyu.app / demo1234` 与 `admin@shengyu.app / admin1234` 是公开演示凭据；生产部署不得保留，需删除或改密，并接入企业身份源或至少强制强密码 + 邮件验证。
 
 ### 5.2 会话密钥
