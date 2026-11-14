@@ -29,8 +29,14 @@ export async function buildApp({ db, config }: BuildAppOptions): Promise<Fastify
       config.nodeEnv === 'test'
         ? false
         : {
-            level: config.nodeEnv === 'production' ? 'info' : 'info',
+            level: 'info',
             redact: ['req.headers.cookie', 'req.headers.authorization'],
+            serializers: {
+              req(request: { method: string; url: string; ip?: string }) {
+                // 不记录查询串，避免把搜索词等用户输入写入日志
+                return { method: request.method, url: request.url.split('?')[0], ip: request.ip };
+              },
+            },
           },
     trustProxy: true,
     bodyLimit: 64 * 1024,
@@ -87,7 +93,6 @@ export async function buildApp({ db, config }: BuildAppOptions): Promise<Fastify
         max: config.rateLimitMax,
         timeWindow: '1 minute',
         allowList: [],
-        skip: () => config.nodeEnv === 'test',
       });
 
       api.addHook('onRequest', async (request, reply) => {

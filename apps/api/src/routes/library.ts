@@ -131,7 +131,6 @@ export async function libraryRoutes(app: FastifyInstance): Promise<void> {
     }
     await app.db.transaction(async (tx) => {
       await tx.query('INSERT INTO plays (user_id, track_id) VALUES ($1,$2)', [current.id, body.trackId]);
-      await tx.query('UPDATE tracks SET play_count = play_count + 1 WHERE id = $1', [body.trackId]);
     });
     return { recorded: true };
   });

@@ -63,7 +63,7 @@ export function loadConfig(overrides: Partial<Config> = {}): Config {
     databaseUrl: env.DATABASE_URL ?? 'postgres://postgres@localhost:5432/shengyu',
     jwtSecret,
     cookieSecure: bool(env.COOKIE_SECURE, false),
-    allowedOrigins: (env.ALLOWED_ORIGINS ?? 'http://localhost:5173,http://localhost:8080')
+    allowedOrigins: (env.ALLOWED_ORIGINS ?? 'http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080,http://127.0.0.1:8080')
       .split(',')
       .map((s) => s.trim())
       .filter(Boolean),
